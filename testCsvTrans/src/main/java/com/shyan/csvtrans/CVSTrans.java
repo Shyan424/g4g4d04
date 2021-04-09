@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.MappingIterator;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.shyan.model.vo.TestVO;
@@ -15,11 +16,11 @@ public class CVSTrans {
 
 		// jackson version 2.12.2
 		try {
-			String fileName = "J:\\Program\\workspace_playground\\testCsvTrans\\src\\main\\resources\\test.csv";
+			String fileName = "C:\\workspace_playground\\testCsvTrans\\src\\main\\resources\\test.csv";
 			File csvFile = new File(fileName);
-			CsvMapper mapper = new CsvMapper();
+			CsvMapper cmapper = new CsvMapper();
 			CsvSchema schema = CsvSchema.emptySchema().withHeader(); // use first row as header; otherwise defaults are fine
-			MappingIterator<TestVO> it = mapper.readerFor(TestVO.class).with(schema).readValues(csvFile);
+			MappingIterator<TestVO> it = cmapper.readerFor(TestVO.class).with(schema).readValues(csvFile);
 			List<TestVO> list = new LinkedList<>();
 			
 			while (it.hasNext()) {
@@ -27,6 +28,19 @@ public class CVSTrans {
 			}
 			
 			list.forEach(vo -> System.out.println(vo.toString()));
+			
+			
+			ObjectMapper omapper = new ObjectMapper();
+			System.out.println();
+			System.out.println(omapper.writeValueAsString(list));
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			// 把String的json轉到VO key必須完全一樣
 //			MappingIterator<Map<String,String>> it = mapper.readerFor(Map.class).with(schema).readValues(csvFile);

@@ -1,9 +1,18 @@
 package com.shyan.model.vo;
 
-public class TestVO {
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+@JsonPropertyOrder({
+	"firstname",
+	"lastname",
+})
+public class TestVO {
+	
+	@JsonProperty("firstname")
 	private String firstName;
 	
+	@JsonProperty("lastname")
 	private String lastName;
 
 	public String getFirstName() {
